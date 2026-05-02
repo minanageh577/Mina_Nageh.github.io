@@ -1,78 +1,508 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloud Lab</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CloudReach - Cloud Services for Students</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cairo:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --deep: #0d1f3c;
+    --blue: #1a4b8c;
+    --accent: #c8a96e;
+    --gold: #e8c97a;
+    --light: #f5f0e8;
+    --white: #ffffff;
+    --gray: #8a9bb0;
+    --azure: #0078d4;
+    --gcp: #4285f4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', 'Montserrat', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── LANG TOGGLE ── */
+  .lang-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 48px;
+    background: rgba(10,22,40,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,169,110,0.2);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+  .logo span { color: var(--white); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 600;
+    color: var(--gray); text-decoration: none;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .lang-btn {
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 6px 18px; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700;
+    cursor: pointer; letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  .lang-btn:hover { background: var(--accent); color: var(--navy); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    padding: 100px 48px 60px;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(26,75,140,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(200,169,110,0.15) 0%, transparent 50%),
+      var(--navy);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(200,169,110,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,169,110,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 900px; text-align: center; position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,169,110,0.12);
+    border: 1px solid rgba(200,169,110,0.35);
+    color: var(--accent);
+    padding: 6px 20px; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 32px;
+    animation: fadeDown 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900; line-height: 1.1;
+    margin-bottom: 24px;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    font-size: 1.1rem; color: var(--gray); line-height: 1.8;
+    max-width: 660px; margin: 0 auto 40px;
+    animation: fadeUp 0.9s 0.4s ease both;
+  }
+  .hero-cta {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.9s 0.6s ease both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    color: var(--navy); border: none;
+    padding: 14px 36px; border-radius: 6px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,169,110,0.35); }
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    color: var(--white);
+    padding: 14px 36px; border-radius: 6px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* floating cards */
+  .floating-cards {
+    display: flex; justify-content: center; gap: 20px;
+    margin-top: 60px; flex-wrap: wrap;
+    animation: fadeUp 0.9s 0.8s ease both;
+  }
+  .float-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 18px 28px;
+    display: flex; align-items: center; gap: 12px;
+    backdrop-filter: blur(8px);
+  }
+  .float-card .icon { font-size: 1.8rem; }
+  .float-card .label { font-size: 0.8rem; color: var(--gray); }
+  .float-card .name { font-size: 1rem; font-weight: 700; color: var(--white); }
+
+  /* ── PROBLEM SECTION ── */
+  .section {
+    padding: 100px 48px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 900;
+    line-height: 1.2; margin-bottom: 20px;
+  }
+  .section-sub { font-size: 1rem; color: var(--gray); line-height: 1.8; max-width: 600px; }
+
+  .problem-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px; margin-top: 60px;
+  }
+  .problem-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 36px 28px;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .problem-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .problem-card:hover { border-color: rgba(200,169,110,0.3); transform: translateY(-4px); }
+  .problem-card:hover::before { transform: scaleX(1); }
+  .problem-icon { font-size: 2.2rem; margin-bottom: 20px; }
+  .problem-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+  .problem-text { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+  /* ── SERVICES ── */
+  .services-bg {
+    background: linear-gradient(180deg, var(--navy) 0%, var(--deep) 50%, var(--navy) 100%);
+    padding: 100px 0;
+  }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px; margin-top: 60px;
+  }
+  .service-card {
+    border-radius: 20px; padding: 40px 36px;
+    position: relative; overflow: hidden;
+    cursor: pointer; transition: transform 0.3s;
+  }
+  .service-card:hover { transform: translateY(-6px); }
+  .service-card.azure { background: linear-gradient(135deg, #0d2b5e, #1a4b8c); border: 1px solid rgba(0,120,212,0.4); }
+  .service-card.gcp { background: linear-gradient(135deg, #1a2f1a, #1e4620); border: 1px solid rgba(52,168,83,0.4); }
+  .service-card.email { background: linear-gradient(135deg, #2d1a0e, #5c3a1e); border: 1px solid rgba(200,169,110,0.4); }
+  .service-card .badge {
+    display: inline-block;
+    padding: 4px 14px; border-radius: 50px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 24px;
+  }
+  .azure .badge { background: rgba(0,120,212,0.25); color: #5ba3e8; }
+  .gcp .badge { background: rgba(52,168,83,0.25); color: #7bc98a; }
+  .email .badge { background: rgba(200,169,110,0.25); color: var(--accent); }
+  .service-card h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 14px; }
+  .service-card p { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 28px; }
+  .service-features { list-style: none; }
+  .service-features li {
+    font-size: 0.85rem; color: rgba(255,255,255,0.75);
+    padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .service-features li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+  .service-price {
+    margin-top: 28px;
+    font-size: 0.8rem; color: rgba(255,255,255,0.5);
+  }
+  .service-price strong { font-size: 1.4rem; color: var(--white); font-weight: 800; }
+
+  /* ── HOW IT WORKS ── */
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 60px; position: relative; }
+  .steps::before {
+    content: ''; position: absolute;
+    right: 27px; top: 40px; bottom: 40px; width: 2px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+  }
+  [dir="ltr"] .steps::before { left: 27px; right: auto; }
+  .step {
+    display: flex; gap: 32px; align-items: flex-start;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .step-num {
+    width: 56px; height: 56px; flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 900; color: var(--navy);
+    position: relative; z-index: 2;
+  }
+  .step-content h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+  .step-content p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+  /* ── TRUST ── */
+  .trust-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px; margin-top: 60px;
+  }
+  .trust-card {
+    text-align: center; padding: 36px 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+  }
+  .trust-card .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .trust-card .desc { font-size: 0.85rem; color: var(--gray); }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    margin: 0 48px 100px;
+    border-radius: 24px;
+    padding: 80px 48px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at center, rgba(200,169,110,0.15) 0%, transparent 70%),
+      linear-gradient(135deg, #0d1f3c, #1a3a6e);
+    border: 1px solid rgba(200,169,110,0.25);
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '☁';
+    position: absolute; font-size: 20rem; opacity: 0.03;
+    top: -40px; right: -60px; pointer-events: none;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900;
+    margin-bottom: 16px;
+  }
+  .cta-section p { font-size: 1rem; color: var(--gray); margin-bottom: 36px; }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 60px; }
+  @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-info h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 24px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .contact-item .icon { font-size: 1.4rem; width: 40px; text-align: center; }
+  .contact-item .text { font-size: 0.9rem; color: var(--gray); }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.8rem; color: var(--gray); font-weight: 600; letter-spacing: 0.5px; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px; padding: 12px 16px;
+    color: var(--white); font-family: 'Cairo', sans-serif; font-size: 0.9rem;
+    transition: border-color 0.3s;
+    resize: vertical;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--accent);
+  }
+  .form-group select option { background: var(--deep); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 40px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+  footer .logo { font-size: 1.2rem; }
+  footer p { font-size: 0.8rem; color: var(--gray); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── LTR (English) ── */
+  html[dir="ltr"] body { font-family: 'Montserrat', 'Cairo', sans-serif; }
+  html[dir="ltr"] .steps::before { left: 27px; right: auto; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .lang-bar { padding: 12px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 90px 20px 60px; }
+    .section { padding: 60px 20px; }
+    .cta-section { margin: 0 20px 60px; padding: 48px 24px; }
+    footer { padding: 32px 20px; flex-direction: column; text-align: center; }
+  }
+</style>
 </head>
+<body>
 
-<body class="bg-gray-950 text-white">
+<!-- NAVBAR -->
+<nav class="lang-bar">
+  <div class="logo">Cloud<span>Reach</span></div>
+  <div class="nav-links">
+    <a href="#services" id="nav-services">الخدمات</a>
+    <a href="#how" id="nav-how">كيف يعمل</a>
+    <a href="#contact" id="nav-contact">تواصل معنا</a>
+  </div>
+  <button class="lang-btn" onclick="toggleLang()" id="langBtn">EN</button>
+</nav>
 
-  <!-- Hero -->
-  <section class="text-center pt-24 px-6 max-w-3xl mx-auto">
-
-    <h1 class="text-4xl md:text-5xl font-bold leading-tight">
-      مش قادر تستخدم AWS أو Azure؟
-      <br>
-      <span class="text-blue-500">جرب Cloud جاهز بدون فيزا</span>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">☁ <span id="badge-text">خدمات السحابة للطلبة</span></div>
+    <h1 id="hero-title">
+      <span class="highlight">السحابة</span> في متناول
+      <br>كل طالب
     </h1>
-
-    <p class="mt-6 text-gray-400 text-lg">
-      وفرنا لك سيرفر جاهز تشتغل عليه فورًا بدل ما تضيع وقت في التسجيل والدفع
-    </p>
-
-    <div class="mt-6 bg-yellow-500 text-black p-3 rounded-lg font-bold">
-      ⚠️ أماكن محدودة (10 طلاب فقط هذا الأسبوع)
+    <p id="hero-desc">لا فيزا، لا إيميل جامعي؟ لا مشكلة. نحن نوفر لك اشتراكات Azure وGoogle Cloud بطريقة سهلة وموثوقة.</p>
+    <div class="hero-cta">
+      <a href="#services" class="btn-primary" id="cta1">استعرض الخدمات</a>
+      <a href="#contact" class="btn-outline" id="cta2">تواصل معنا</a>
     </div>
-
-    <a href="https://wa.me/20127643471"
-       class="block mt-8 bg-green-500 py-4 rounded-xl text-lg hover:bg-green-600">
-       احجز مكانك الآن
-    </a>
-
-  </section>
-
-  <!-- Social Proof -->
-  <section class="mt-16 text-center">
-    <p class="text-gray-400">+25 طالب بدأوا بالفعل</p>
-  </section>
-
-  <!-- Features -->
-  <section class="mt-16 max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-6">
-
-    <div class="bg-gray-900 p-6 rounded-xl">
-      ✅ Linux Server جاهز
+    <div class="floating-cards">
+      <div class="float-card">
+        <div class="icon">☁</div>
+        <div><div class="name">Microsoft Azure</div><div class="label">Student Subscription</div></div>
+      </div>
+      <div class="float-card">
+        <div class="icon">🌐</div>
+        <div><div class="name">Google Cloud</div><div class="label">GCP Credits</div></div>
+      </div>
+      <div class="float-card">
+        <div class="icon">🎓</div>
+        <div><div class="name" id="edu-label">إيميل جامعي</div><div class="label">Edu Email</div></div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="bg-gray-900 p-6 rounded-xl">
-      ✅ SSH Access
+<!-- PROBLEM -->
+<section style="background: var(--deep); padding: 100px 0;">
+  <div class="section">
+    <div class="section-label" id="prob-label">المشكلة</div>
+    <h2 class="section-title" id="prob-title">لماذا يصعب على الطلبة الوصول<br>للخدمات السحابية؟</h2>
+    <p class="section-sub" id="prob-sub">كثير من الطلبة حول العالم يواجهون عقبات حقيقية تمنعهم من الاستفادة من أقوى منصات السحابة.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">💳</div>
+        <div class="problem-title" id="p1-title">مشكلة الفيزا</div>
+        <p class="problem-text" id="p1-text">كثير من الدول تواجه صعوبة في الحصول على بطاقات ائتمانية دولية مقبولة على Azure وGoogle Cloud.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">📧</div>
+        <div class="problem-title" id="p2-title">الإيميل الجامعي</div>
+        <p class="problem-text" id="p2-text">بعض الجامعات لا توفر إيميلات .edu رسمية، مما يحرم الطلبة من الاستفادة من البرامج المجانية.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🌍</div>
+        <div class="problem-title" id="p3-title">القيود الجغرافية</div>
+        <p class="problem-text" id="p3-text">بعض المناطق مستبعدة أو محدودة من برامج الطلبة في المنصات الكبرى بشكل غير عادل.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🔒</div>
+        <div class="problem-title" id="p4-title">التحقق المعقد</div>
+        <p class="problem-text" id="p4-text">إجراءات التحقق المعقدة تجعل عملية التسجيل طويلة ومربكة للطلبة المبتدئين.</p>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="bg-gray-900 p-6 rounded-xl">
-      ✅ Docker + Git
+<!-- SERVICES -->
+<div class="services-bg">
+  <div class="section">
+    <div class="section-label" id="serv-label">خدماتنا</div>
+    <h2 class="section-title" id="serv-title">كل ما تحتاجه في مكان واحد</h2>
+    <p class="section-sub" id="serv-sub">نقدم لك الوصول الكامل لأقوى منصات السحابة بدون تعقيدات.</p>
+    <div class="services-grid">
+      <div class="service-card azure">
+        <div class="badge">Microsoft Azure</div>
+        <h3>Azure للطلبة</h3>
+        <p id="az-desc">اشتراك كامل في Microsoft Azure مع رصيد مجاني للتعلم والمشاريع الأكاديمية.</p>
+        <ul class="service-features">
+          <li id="az-f1">رصيد Azure مجاني</li>
+          <li id="az-f2">وصول لأكثر من 25 خدمة</li>
+          <li id="az-f3">Azure DevOps مجاناً</li>
+          <li id="az-f4">دعم تقني متخصص</li>
+          <li id="az-f5">تفعيل خلال 24 ساعة</li>
+        </ul>
+        <div class="service-price"><span id="az-from">يبدأ من</span> <strong>$9.99</strong></div>
+      </div>
+      <div class="service-card gcp">
+        <div class="badge">Google Cloud</div>
+        <h3>GCP للطلبة</h3>
+        <p id="gcp-desc">اشتراك Google Cloud Platform مع رصيد للاستخدام والوصول لجميع الخدمات.</p>
+        <ul class="service-features">
+          <li id="gcp-f1">رصيد GCP مجاني</li>
+          <li id="gcp-f2">Google Kubernetes Engine</li>
+          <li id="gcp-f3">BigQuery وFirebase</li>
+          <li id="gcp-f4">Vertex AI & ML Tools</li>
+          <li id="gcp-f5">تفعيل فوري</li>
+        </ul>
+        <div class="service-price"><span id="gcp-from">يبدأ من</span> <strong>$9.99</strong></div>
+      </div>
+      <div class="service-card email">
+        <div class="badge">Edu Email</div>
+        <h3 id="email-title">إيميل جامعي</h3>
+        <p id="email-desc">إيميل جامعي رسمي يمنحك الوصول لجميع البرامج المخصصة للطلبة حول العالم.</p>
+        <ul class="service-features">
+          <li id="em-f1">إيميل .edu رسمي</li>
+          <li id="em-f2">GitHub Student Pack</li>
+          <li id="em-f3">JetBrains مجاناً</li>
+          <li id="em-f4">Microsoft 365 للطلبة</li>
+          <li id="em-f5">Canva Pro مجاناً</li>
+        </ul>
+        <div class="service-price"><span id="em-from">يبدأ من</span> <strong>$4.99</strong></div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="bg-gray-900 p-6 rounded-xl">
-      ✅ مناسب لمادة Cloud
-    </div>
-
-  </section>
-
-  <!-- Pricing -->
-  <section class="mt-16 text-center">
-
-    <h2 class="text-2xl font-bold mb-6">ابدأ بسعر بسيط</h2>
-
-    <p class="text-3xl font-bold text-blue-500">30 جنيه / أسبوع</p>
-    <p class="text-gray-400 mb-6">أو 80 جنيه / شهر</p>
-
-    <a href="https://wa.me/201276434781"
-       class="bg-green-500 px-8 py-4 rounded-xl text-lg hover:bg-green-600">
-       احجز الآن
-    </a>
-
-  </section>
-
-</body> 
-</html>
+<!-- HOW IT WORKS -->
+<section id="how" style="background: var(--navy); padding: 100px 0;">
+  <div class="section">
+    <div class="section-label" id="how-label">كيف يعمل</div>
+    <h2 class="section-title" id="how-title">أربع خطوات بسيطة</h2>
+    <p class="section-sub" id="how-sub">العملية كلها سريعة وسهلة، بدون تعقيدات.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">١</div>
+        <div class="step-content">
+          <h4 id="s1-title">اختر خدمتك</h4>
+          <p id="s1-text">تصفح خدماتنا واختر الاشتراك المناسب لاحتياجاتك الأكاديمية والتقنية.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">٢</div>
+        <div class="step-content">
+          <h4 id="s2-titl
