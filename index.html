@@ -1,503 +1,570 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloudReach</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloudReach</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+<!-- ═════════ NAVBAR ═════════ -->
+<nav class="lang-bar">
+  <div class="logo">
+    Cloud<span>Reach</span>
+  </div>
+  <div class="nav-links">
+    <a href="#services" id="nav-services">الخدمات</a>
+    <a href="#how" id="nav-how">كيف يعمل</a>
+    <a href="#contact" id="nav-contact">تواصل معنا</a>
+  </div>
 
-    <div class="navbar">
+  <button class="lang-btn" onclick="toggleLang()" id="langBtn">
+    EN
+  </button>
 
-        <button class="lang-btn">
-            EN
+</nav>
+
+<!-- ═════════ HERO ═════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      ☁
+      <span id="badge-text">خدمات السحابة للطلبة</span>
+    </div>
+    <h1 id="hero-title">
+      <span class="highlight">السحابة</span>
+      في متناول
+      <br>
+      كل طالب
+    </h1>
+
+    <p id="hero-desc">
+      لا فيزا، لا إيميل جامعي؟ لا مشكلة.
+      نحن نوفر لك اشتراكات Azure و Google Cloud
+      بطريقة سهلة وموثوقة.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#services" class="btn-primary" id="cta1">
+        استعرض الخدمات
+      </a>
+
+      <a href="#contact" class="btn-outline" id="cta2">
+        تواصل معنا
+      </a>
+
+    </div>
+
+    <!-- floating cards -->
+    <div class="floating-cards">
+      <div class="float-card">
+        <div class="icon">☁</div>
+        <div>
+          <div class="name">Microsoft Azure</div>
+          <div class="label">Student Subscription</div>
+        </div>
+      </div>
+
+      <div class="float-card">
+        <div class="icon">🌐</div>
+
+        <div>
+          <div class="name">Google Cloud</div>
+          <div class="label">GCP Credits</div>
+        </div>
+      </div>
+
+      <div class="float-card">
+        <div class="icon">🎓</div>
+
+        <div>
+          <div class="name" id="edu-label">إيميل جامعي</div>
+          <div class="label">Edu Email</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ═════════ PROBLEM ═════════ -->
+
+<section>
+  <div class="section">
+    <div class="section-label" id="prob-label">
+      المشكلة
+    </div>
+    <h2 class="section-title" id="prob-title">
+      لماذا يصعب على الطلبة الوصول
+      <br>
+      للخدمات السحابية؟
+    </h2>
+
+    <p class="section-sub" id="prob-sub">
+      كثير من الطلبة حول العالم يواجهون عقبات حقيقية
+      تمنعهم من الاستفادة من أقوى منصات السحابة.
+    </p>
+
+    <!-- cards -->
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">💳</div>
+        <div class="problem-title" id="p1-title">
+          مشكلة الفيزا
+        </div>
+
+        <div class="problem-text" id="p1-text">
+          كثير من الدول تواجه صعوبة في الحصول
+          على بطاقات ائتمانية دولية مقبولة.
+        </div>
+      </div>
+
+      <div class="problem-card">
+        <div class="problem-icon">📧</div>
+        <div class="problem-title" id="p2-title">
+          الإيميل الجامعي
+        </div>
+
+        <div class="problem-text" id="p2-text">
+          بعض الجامعات لا توفر إيميلات .edu
+          رسمية للطلبة.
+        </div>
+
+      </div>
+
+      <div class="problem-card">
+        <div class="problem-icon">🌍</div>
+
+        <div class="problem-title" id="p3-title">
+          القيود الجغرافية
+        </div>
+        <div class="problem-text" id="p3-text">
+          بعض المناطق مستبعدة أو محدودة
+          من برامج الطلبة.
+        </div>
+
+      </div>
+
+      <div class="problem-card">
+        <div class="problem-icon">🔒</div>
+        <div class="problem-title" id="p4-title">
+          التحقق المعقد
+        </div>
+
+        <div class="problem-text" id="p4-text">
+          إجراءات التحقق المعقدة تجعل التسجيل
+          طويل ومربك.
+        </div>
+        </div>
+        </div>
+        </div>
+
+</section>
+
+<!-- ═════════ SERVICES ═════════ -->
+<section class="services-bg" id="services">
+  <div class="section">
+    <div class="section-label" id="serv-label">
+      خدماتنا
+    </div>
+
+    <h2 class="section-title" id="serv-title">
+      كل ما تحتاجه في مكان واحد
+    </h2>
+    <p class="section-sub" id="serv-sub">
+      نقدم لك الوصول الكامل لأقوى منصات السحابة
+      بدون تعقيدات.
+    </p>
+
+    <!-- cards -->
+    <div class="services-grid">
+
+      <!-- Azure -->
+
+      <div class="service-card azure">
+
+        <div class="badge">
+          MICROSOFT AZURE
+        </div>
+
+        <h3 id="az-title">
+             Azure للطلبة
+         </h3>
+
+        <p id="az-desc">
+          اشتراك كامل في Microsoft Azure
+          مع رصيد مجاني للتعلم والمشاريع.
+        </p>
+
+        <ul class="service-features">
+        <li id="az-f1">رصيد Azure مجاني</li>
+        <li id="az-f2">وصول لأكثر من 25 خدمة</li>
+        <li id="az-f3">Azure DevOps مجاناً</li>
+        <li id="az-f4">دعم تقني متخصص</li>
+        <li id="az-f5">تفعيل خلال 24 ساعة</li>
+
+</ul>
+        <div class="service-price">
+          <span id="az-from">يبدأ من</span>
+          <strong>$9.99</strong>
+        </div>
+
+      </div>
+
+      <!-- GCP -->
+      <div class="service-card gcp">
+        <div class="badge">
+          GOOGLE CLOUD
+        </div>
+
+        <h3 id="gcp-title">
+        GCP للطلبة
+        </h3>
+        <p id="gcp-desc">
+          اشتراك Google Cloud Platform
+          مع رصيد للاستخدام والوصول الكامل.
+        </p>
+
+        <ul class="service-features">
+
+        <li id="gcp-f1">رصيد GCP مجاني</li>
+        <li id="gcp-f2">Google Kubernetes Engine</li>
+        <li id="gcp-f3">BigQuery و Firebase</li>
+        <li id="gcp-f4">Vertex AI & ML Tools</li>
+        <li id="gcp-f5">تفعيل فوري</li>
+ </ul>
+
+        <div class="service-price">
+          <span id="gcp-from">يبدأ من</span>
+          <strong>$9.99</strong>
+        </div>
+      </div>
+
+      <!-- EMAIL -->
+      <div class="service-card email">
+        <div class="badge">
+          EDU EMAIL
+        </div>
+
+        <h3 id="email-title">
+        Edu Email
+        </h3>
+
+        <p id="email-desc">
+          إيميل جامعي رسمي يمنحك الوصول
+          لجميع البرامج التعليمية.
+        </p>
+
+        <ul class="service-features">
+
+        <li id="em-f1">إيميل .edu رسمي</li>
+        <li id="em-f2">GitHub Student Pack</li>
+        <li id="em-f3">JetBrains مجاناً</li>
+        <li id="em-f4">Microsoft 365 للطلبة</li>
+        <li id="em-f5">Canva Pro مجاناً</li>
+
+</ul>
+        <div class="service-price">
+          <span id="em-from">يبدأ من</span>
+          <strong>$4.99</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ HOW IT WORKS ═════════ -->
+<section id="how">
+  <div class="section">
+
+    <div class="section-label" id="how-label">
+      كيف يعمل
+    </div>
+    <h2 class="section-title" id="how-title">
+      أربع خطوات بسيطة
+    </h2>
+
+    <p class="section-sub" id="how-sub">
+      العملية كلها سريعة وسهلة بدون تعقيدات.
+    </p>
+
+    <div class="steps">
+
+      <!-- step -->
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+
+          <h4 id="s1-title">
+            اختر خدمتك
+          </h4>
+
+          <p id="s1-text">
+            تصفح خدماتنا واختر الاشتراك المناسب
+            لاحتياجاتك.
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- step -->
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4 id="s2-title">
+            تواصل معنا
+          </h4>
+          <p id="s2-text">
+            أرسل طلبك وسنرد عليك خلال ساعات.
+          </p>
+        </div>
+      </div>
+
+      <!-- step -->
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4 id="s3-title">
+            أكمل الدفع
+          </h4>
+
+          <p id="s3-text">
+            طرق دفع سهلة ومناسبة لجميع الطلبة.
+          </p>
+        </div>
+      </div>
+
+      <!-- step -->
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4 id="s4-title">
+            ابدأ الاستخدام
+          </h4>
+
+          <p id="s4-text">
+            استلم بياناتك وابدأ رحلتك السحابية فوراً.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ TRUST ═════════ -->
+
+<section>
+  <div class="section">
+    <div class="section-label" id="trust-label">
+      لماذا نحن
+    </div>
+
+    <h2 class="section-title" id="trust-title">
+      أرقام تتحدث عن نفسها
+    </h2>
+
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="num">500+</div>
+        <div class="desc" id="t1">
+          طالب مستفيد
+        </div>
+
+      </div>
+
+      <div class="trust-card">
+        <div class="num">24h</div>
+        <div class="desc" id="t2">
+          وقت التفعيل
+        </div>
+      </div>
+
+      <div class="trust-card">
+        <div class="num">3</div>
+        <div class="desc" id="t3">
+          منصات سحابية
+        </div>
+      </div>
+
+      <div class="trust-card">
+        <div class="num">99%</div>
+        <div class="desc" id="t4">
+          رضا العملاء
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ CTA ═════════ -->
+
+<section class="cta-section">
+  <h2 id="cta-title">
+    جاهز تبدأ رحلتك السحابية؟
+  </h2>
+
+  <p id="cta-desc">
+    انضم لمئات الطلبة الذين وجدوا طريقهم
+    إلى Azure و Google Cloud معنا
+  </p>
+  <a href="#contact" class="btn-primary" id="cta-btn">
+    ابدأ الآن
+  </a>
+</section>
+
+<!-- ═════════ CONTACT ═════════ -->
+<section id="contact">
+  <div class="section">
+    <div class="section-label" id="cont-label">
+      تواصل معنا
+    </div>
+    <h2 class="section-title" id="cont-title">
+      نحن هنا لمساعدتك
+    </h2>
+    <div class="contact-grid">
+
+      <!-- FORM -->
+      <div class="contact-form">
+        <div class="form-group">
+          <label id="lbl-name">
+            الاسم الكامل
+          </label>
+          <input type="text"
+                 id="inp-name"
+                 placeholder="أدخل اسمك الكامل">
+        </div>
+
+        <div class="form-group">
+          <label id="lbl-email">
+            البريد الإلكتروني
+          </label>
+
+          <input type="email"
+                 id="inp-email"
+                 placeholder="example@email.com">
+                </div>
+
+        <div class="form-group">
+          <label id="lbl-service">
+            الخدمة المطلوبة
+          </label>
+
+          <select id="inp-service">
+            <option id="opt-choose">
+              اختر الخدمة
+            </option>
+
+            <option id="opt-az">
+              Azure للطلبة
+            </option>
+
+            <option id="opt-gcp">
+              Google Cloud
+            </option>
+
+            <option id="opt-em">
+              إيميل جامعي
+            </option>
+
+            <option id="opt-bundle">
+              باقة شاملة
+            </option>
+            </select>
+            </div>
+
+        <div class="form-group">
+          <label id="lbl-msg">
+            رسالتك
+          </label>
+
+          <textarea rows="5"
+                    id="inp-msg"
+                    placeholder="اكتب أي تفاصيل إضافية..."></textarea>
+        </div>
+
+        <button class="btn-primary"
+                id="submit-btn">
+          إرسال الطلب ←
         </button>
-
-        <ul>
-            <li>الخدمات</li>
-            <li>كيف يعمل</li>
-            <li>تواصل معنا</li>
-        </ul>
-
-        <div class="logo">
-            <h2>CloudReach</h2>
         </div>
 
-    </div>
+      <!-- INFO -->
+      <div class="contact-info">
+        <h3 id="reach-title">
+          تواصل بأي طريقة تناسبك
+        </h3>
 
-    <!-- ================= HERO SECTION ================= -->
+        <div class="contact-item">
+          <div class="icon">📧</div>
+          <div>
 
-    <div class="hero-section">
-
-        <div class="hero-content">
-
-            <button class="small-btn">
-                ☁ خدمات السحابة للطلبة
-            </button>
-
-            <h1>
-                <span>السحابة</span>
-                في متناول
-                <br>
-                كل طالب
-            </h1>
-
-            <p>
-                لا فيزا، لا إيميل جامعي؟ لا مشكلة.
-                نحن نوفر لك اشتراكات Azure و Google Cloud
-                بطريقة سهلة وموثوقة.
-            </p>
-
-            <div class="hero-buttons">
-
-                <button class="gold-btn">
-                    استعرض الخدمات
-                </button>
-
-                <button class="dark-btn">
-                    تواصل معنا
-                </button>
-
+            <div id="email-lbl">
+              البريد الإلكتروني
             </div>
 
-            <!-- cards -->
-
-            <div class="hero-cards">
-
-                <div class="mini-card">
-
-                    <h3>Microsoft Azure ☁</h3>
-
-                    <p>Student Subscription</p>
-
-                </div>
-
-                <div class="mini-card">
-
-                    <h3>Google Cloud 🌐</h3>
-
-                    <p>GCP Credits</p>
-
-                </div>
-
-                <div class="mini-card">
-
-                    <h3>إيميل جامعي 🎓</h3>
-
-                    <p>Edu Email</p>
-
-                </div>
-
+            <div class="text">
+              support@cloudreach.com
             </div>
+
+          </div>
 
         </div>
 
-    </div>
+        <div class="contact-item">
 
-    <!-- ================= PROBLEM SECTION ================= -->
+          <div class="icon">💬</div>
 
-    <div class="problem-section">
+          <div>
 
-        <h5>المشكلة</h5>
-
-        <h1>
-            لماذا يصعب على الطلبة الوصول
-            <br>
-            للخدمات السحابية؟
-        </h1>
-
-        <p class="problem-text">
-            كثير من الطلبة حول العالم يواجهون عقبات حقيقية
-            تمنعهم من الاستفادة من أقوى منصات السحابة.
-        </p>
-
-        <div class="problem-container">
-
-            <!-- card 1 -->
-
-            <div class="problem-card">
-
-                <h2>💳</h2>
-
-                <h3>مشكلة الفيزا</h3>
-
-                <p>
-                    كثير من الدول تواجه صعوبة
-                    في الحصول على بطاقات ائتمانية دولية.
-                </p>
-
+            <div>
+              WhatsApp / Telegram
             </div>
 
-            <!-- card 2 -->
-
-            <div class="problem-card">
-
-                <h2>📧</h2>
-
-                <h3>الإيميل الجامعي</h3>
-
-                <p>
-                    بعض الجامعات لا توفر إيميلات edu
-                    مما يحرم الطلبة من البرامج المجانية.
-                </p>
-
+            <div class="text">
+              +XXX XXX XXX
             </div>
 
-            <!-- card 3 -->
-
-            <div class="problem-card">
-
-                <h2>🌍</h2>
-
-                <h3>القيود الجغرافية</h3>
-
-                <p>
-                    بعض المناطق مستبعدة من البرامج
-                    الخاصة بالطلبة بشكل غير عادل.
-                </p>
-
-            </div>
-
-            <!-- card 4 -->
-
-            <div class="problem-card">
-
-                <h2>🔒</h2>
-
-                <h3>التحقق المعقد</h3>
-
-                <p>
-                    إجراءات التحقق الطويلة
-                    تجعل التسجيل صعب للطلبة.
-                </p>
-
-            </div>
+          </div>
 
         </div>
 
-    </div>
+        <div class="contact-item">
 
-    <!-- ================= SERVICES ================= -->
+          <div class="icon">⏱</div>
 
-    <div class="services-section">
-
-        <h5>خدماتنا</h5>
-
-        <h1>
-            كل ما تحتاجه في مكان واحد
-        </h1>
-
-        <p class="service-title">
-            نقدم لك الوصول الكامل لأقوى منصات السحابة.
-        </p>
-
-        <div class="services-container">
-
-            <!-- Azure -->
-
-            <div class="service-card blue-card">
-
-                <button class="card-btn">
-                    MICROSOFT AZURE
-                </button>
-
-                <h2>Azure للطلبة</h2>
-
-                <p>
-                    اشتراك كامل في Microsoft Azure
-                    مع رصيد مجاني للتعلم.
-                </p>
-
-                <ul class="card-list">
-
-                    <li>✓ رصيد Azure مجاني</li>
-                    <li>✓ وصول لأكثر من 25 خدمة</li>
-                    <li>✓ Azure DevOps مجاناً</li>
-                    <li>✓ دعم تقني متخصص</li>
-                    <li>✓ تفعيل خلال 24 ساعة</li>
-
-                </ul>
-
-                <h1 class="price">
-                    9.99$
-                </h1>
-
+          <div>
+            <div id="hours-lbl">
+              ساعات العمل
             </div>
 
-            <!-- GCP -->
-
-            <div class="service-card green-card">
-
-                <button class="card-btn">
-                    GOOGLE CLOUD
-                </button>
-
-                <h2>GCP للطلبة</h2>
-
-                <p>
-                    اشتراك Google Cloud Platform
-                    مع رصيد مجاني.
-                </p>
-
-                <ul class="card-list">
-
-                    <li>✓ رصيد GCP مجاني</li>
-                    <li>✓ Google Kubernetes</li>
-                    <li>✓ Firebase و BigQuery</li>
-                    <li>✓ Vertex AI Tools</li>
-                    <li>✓ تفعيل فوري</li>
-
-                </ul>
-
-                <h1 class="price">
-                    9.99$
-                </h1>
-
+            <div class="text" id="hours-text">
+              السبت - الخميس، 9 صباحاً - 11 مساءً
             </div>
-
-            <!-- EDU -->
-
-            <div class="service-card brown-card">
-
-                <button class="card-btn">
-                    EDU EMAIL
-                </button>
-
-                <h2>إيميل جامعي</h2>
-
-                <p>
-                    إيميل جامعي رسمي يمنحك
-                    الوصول لجميع البرامج.
-                </p>
-
-                <ul class="card-list">
-
-                    <li>✓ Edu Email رسمي</li>
-                    <li>✓ GitHub Student Pack</li>
-                    <li>✓ JetBrains مجاناً</li>
-                    <li>✓ Microsoft 365</li>
-                    <li>✓ Canva Pro مجاناً</li>
-
-                </ul>
-
-                <h1 class="price">
-                    4.99$
-                </h1>
-
             </div>
-
-        </div>
-
-    </div>
-
-    <!-- ================= STEPS ================= -->
-
-    <div class="steps-section">
-
-        <h5>كيف يعمل</h5>
-
-        <h1>أربع خطوات بسيطة</h1>
-
-        <div class="steps-container">
-
-            <div class="step">
-
-                <div class="circle">1</div>
-
-                <div class="step-text">
-
-                    <h2>اختر خدمتك</h2>
-
-                    <p>
-                        اختر الاشتراك المناسب لاحتياجاتك.
-                    </p>
-
-                </div>
-
             </div>
-
-            <div class="step">
-
-                <div class="circle">2</div>
-
-                <div class="step-text">
-
-                    <h2>تواصل معنا</h2>
-
-                    <p>
-                        أرسل لنا طلبك وسنرد عليك سريعاً.
-                    </p>
-
-                </div>
-
             </div>
-
-            <div class="step">
-
-                <div class="circle">3</div>
-
-                <div class="step-text">
-
-                    <h2>أكمل الدفع</h2>
-
-                    <p>
-                        طرق دفع متعددة وسهلة للطلبة.
-                    </p>
-
-                </div>
-
             </div>
-
-            <div class="step">
-
-                <div class="circle">4</div>
-
-                <div class="step-text">
-
-                    <h2>ابدأ الاستخدام</h2>
-
-                    <p>
-                        استلم بياناتك وابدأ فوراً.
-                    </p>
-
-                </div>
-
             </div>
+            </section>
 
-        </div>
+<!-- ═════════ FOOTER ═════════ -->
 
-    </div>
-
-    <!-- ================= STATISTICS ================= -->
-
-    <div class="stats-section">
-
-        <h5>لماذا نحن</h5>
-
-        <h1>أرقام تتحدث عن نفسها</h1>
-
-        <div class="stats-container">
-
-            <div class="stat-card">
-
-                <h2>500+</h2>
-
-                <p>طالب مستفيد</p>
-
-            </div>
-
-            <div class="stat-card">
-
-                <h2>24h</h2>
-
-                <p>وقت التفعيل</p>
-
-            </div>
-
-            <div class="stat-card">
-
-                <h2>3</h2>
-
-                <p>منصات سحابية</p>
-
-            </div>
-
-            <div class="stat-card">
-
-                <h2>99%</h2>
-
-                <p>رضا العملاء</p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- ================= CONTACT ================= -->
-
-    <div class="contact-section">
-
-        <div class="contact-right">
-
-            <h5>تواصل معنا</h5>
-
-            <h1>نحن هنا لمساعدتك</h1>
-
-            <h2>تواصل بأي طريقة تناسبك</h2>
-
-            <div class="contact-info">
-
-                <h3>📧 البريد الإلكتروني</h3>
-
-                <p>minanageh577@gmail.com</p>
-
-            </div>
-
-            <div class="contact-info">
-
-                <h3>💬 WhatsApp / Telegram</h3>
-
-                <p>201276434781</p>
-
-            </div>
-
-            <div class="contact-info">
-
-                <h3>⏰ ساعات العمل</h3>
-
-                <p>السبت - الخميس | 9 صباحاً - 11 مساءً</p>
-
-            </div>
-
-        </div>
-
-        <!-- form -->
-
-        <div class="contact-left">
-
-            <label>الاسم الكامل</label>
-            <input type="text" id="name">
-
-            <label>البريد الإلكتروني</label>
-            <input type="email" id="email">
-
-            <label>كلمة المرور</label>
-            <input type="password" id="password">
-
-            <p id="message"></p>
-
-            <label>رسالتك</label>
-            <textarea rows="5"></textarea>
-
-            <button onclick="checkPassword()">
-                إرسال الطلب
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- ================= FOOTER ================= -->
-
-    <div class="footer">
-
-        <h2>CloudReach</h2>
-
-        <p>
-            © 2026 جميع الحقوق محفوظة
-        </p>
-
-    </div>
-
+<footer>
+  <div class="logo">
+    Cloud<span>Reach</span>
+  </div>
+  <p id="footer-text">
+    © 2026 CloudReach — خدمات السحابة للطلبة
+  </p>
+  <p id="footer-rights">
+    جميع الحقوق محفوظة
+  </p>
+</footer>
 <script src="script.js"></script>
 
 </body>
-
 </html>
