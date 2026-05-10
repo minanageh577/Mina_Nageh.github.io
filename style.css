@@ -1,356 +1,706 @@
-/* ═════════ LANGUAGE TOGGLE ═════════ */
+/* ═══════════════════════════════════════
+   CLOU DREACH — PREMIUM STYLE
+═══════════════════════════════════════ */
 
-let currentLang = "ar";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cairo:wght@300;400;600;700;800&family=Montserrat:wght@300;400;600;700&display=swap');
 
-function toggleLang() {
-
-  currentLang = currentLang === "ar" ? "en" : "ar";
-  document.documentElement.lang = currentLang;
-  document.documentElement.dir =
-  currentLang === "ar" ? "rtl" : "ltr";
-  document.body.classList.toggle("english");
-  document.getElementById("langBtn").innerText =
-  currentLang === "ar" ? "EN" : "AR";
-  updateTexts();
+:root{
+  --navy:#07152b;
+  --deep:#0b1d3a;
+  --card:#11284d;
+  --gold:#e0c27a;
+  --gold2:#f1d995;
+  --text:#ffffff;
+  --gray:#8fa1be;
+  --line:rgba(255,255,255,.08);
 }
 
-/* ═════════ TRANSLATIONS ═════════ */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
 
-const translations = {
-  ar: {
-    azTitle: "Azure للطلبة",
-    gcpTitle: "GCP للطلبة",
-    emailTitle: "إيميل جامعي",
-    priceFrom: "يبدأ من",
+body{
+  background:
+  radial-gradient(circle at top left, rgba(25,60,120,.35), transparent 35%),
+  radial-gradient(circle at bottom right, rgba(224,194,122,.08), transparent 30%),
+  var(--navy);
 
-    navServices: "الخدمات",
-    navHow: "كيف يعمل",
-    navContact: "تواصل معنا",
-    badge: "خدمات السحابة للطلبة",
-    heroTitle: `
-      <span class="highlight">السحابة</span>
-      في متناول
-      <br>
-      كل طالب
-    `,
+  color:var(--text);
+  font-family:'Cairo',sans-serif;
+  overflow-x:hidden;
+}
 
-    heroDesc:
-      "لا فيزا، لا إيميل جامعي؟ لا مشكلة. نحن نوفر لك اشتراكات Azure و Google Cloud بطريقة سهلة وموثوقة.",
-    cta1: "استعرض الخدمات",
-    cta2: "تواصل معنا",
-    eduLabel: "إيميل جامعي",
-    probLabel: "المشكلة",
-    probTitle:
-      "لماذا يصعب على الطلبة الوصول <br> للخدمات السحابية؟",
-    probSub:
-      "كثير من الطلبة حول العالم يواجهون عقبات حقيقية تمنعهم من الاستفادة من أقوى منصات السحابة.",
-    p1Title: "مشكلة الفيزا",
-    p1Text:
-      "كثير من الدول تواجه صعوبة في الحصول على بطاقات ائتمانية دولية مقبولة.",
-    p2Title: "الإيميل الجامعي",
-    p2Text:
-      "بعض الجامعات لا توفر إيميلات .edu رسمية للطلبة.",
-    p3Title: "القيود الجغرافية",
-    p3Text:
-      "بعض المناطق مستبعدة أو محدودة من برامج الطلبة.",
-    p4Title: "التحقق المعقد",
-    p4Text:
-      "إجراءات التحقق المعقدة تجعل التسجيل طويل ومربك.",
-    servLabel: "خدماتنا",
-    servTitle: "كل ما تحتاجه في مكان واحد",
-    servSub:
-      "نقدم لك الوصول الكامل لأقوى منصات السحابة بدون تعقيدات.",
-    azDesc:
-      "اشتراك كامل في Microsoft Azure مع رصيد مجاني للتعلم والمشاريع.",
-    azF1: "رصيد Azure مجاني",
-    azF2: "وصول لأكثر من 25 خدمة",
-    azF3: "Azure DevOps مجاناً",
-    azF4: "دعم تقني متخصص",
-    azF5: "تفعيل خلال 24 ساعة",
-    gcpDesc:
-      "اشتراك Google Cloud Platform مع رصيد للاستخدام والوصول الكامل.",
-    gcpF1: "رصيد GCP مجاني",
-    gcpF2: "Google Kubernetes Engine",
-    gcpF3: "BigQuery و Firebase",
-    gcpF4: "Vertex AI & ML Tools",
+/* ═════════ NAVBAR ═════════ */
 
-    gcpF5: "تفعيل فوري",
-    emailTitle: "إيميل جامعي",
-    emailDesc:
-      "إيميل جامعي رسمي يمنحك الوصول لجميع البرامج التعليمية.",
-    emF1: "إيميل .edu رسمي",
-    emF2: "GitHub Student Pack",
-    emF3: "JetBrains مجاناً",
-    emF4: "Microsoft 365 للطلبة",
-    emF5: "Canva Pro مجاناً",
-    from: "يبدأ من",
-    howLabel: "كيف يعمل",
-    howTitle: "أربع خطوات بسيطة",
-    howSub:
-      "العملية كلها سريعة وسهلة بدون تعقيدات.",
-    s1Title: "اختر خدمتك",
-    s1Text:
-      "تصفح خدماتنا واختر الاشتراك المناسب لاحتياجاتك.",
-    s2Title: "تواصل معنا",
-    s2Text:
-      "أرسل طلبك وسنرد عليك خلال ساعات.",
-    s3Title: "أكمل الدفع",
-    s3Text:
-      "طرق دفع سهلة ومناسبة لجميع الطلبة.",
-    s4Title: "ابدأ الاستخدام",
-    s4Text:
-      "استلم بياناتك وابدأ رحلتك السحابية فوراً.",
-    trustLabel: "لماذا نحن",
-    trustTitle: "أرقام تتحدث عن نفسها",
-    t1: "طالب مستفيد",
-    t2: "وقت التفعيل",
-    t3: "منصات سحابية",
-    t4: "رضا العملاء",
-    ctaTitle: "جاهز تبدأ رحلتك السحابية؟",
-    ctaDesc:
-      "انضم لمئات الطلبة الذين وجدوا طريقهم إلى Azure و Google Cloud معنا",
-    ctaBtn: "ابدأ الآن",
-    contLabel: "تواصل معنا",
-    contTitle: "نحن هنا لمساعدتك",
-    reachTitle: "تواصل بأي طريقة تناسبك",
-    lblName: "الاسم الكامل",
-    lblEmail: "البريد الإلكتروني",
-    lblService: "الخدمة المطلوبة",
-    lblMsg: "رسالتك",
-    inpName: "أدخل اسمك الكامل",
-    inpMsg: "اكتب أي تفاصيل إضافية...",
-    optChoose: "اختر الخدمة",
-    submitBtn: "إرسال الطلب ←",
-    emailLbl: "البريد الإلكتروني",
-    hoursLbl: "ساعات العمل",
-    hoursText:
-      "السبت - الخميس، 9 صباحاً - 11 مساءً",
-    footerText:
-      "© 2026 CloudReach — خدمات السحابة للطلبة",
-    footerRights:
-      "جميع الحقوق محفوظة"
-  },
+.lang-bar{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:999;
+  padding:18px 55px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(5,15,35,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
 
-  /* ═════════ ENGLISH ═════════ */
+.logo{
+  font-size:2rem;
+  font-family:'Playfair Display',serif;
+  font-weight:900;
+  color:var(--gold);
+  letter-spacing:1px;
+}
 
-  en: {
-    azTitle: "Azure for Students",
-    gcpTitle: "GCP for Students",
-    emailTitle: "Edu Email",
-    priceFrom: "Starts from",
+.logo span{
+  color:#fff;
+}
 
+.nav-links{
+  display:flex;
+  gap:45px;
+}
 
+.nav-links a{
+  color:var(--gray);
+  text-decoration:none;
+  font-weight:700;
+  transition:.3s;
+}
 
+.nav-links a:hover{
+  color:white;
+}
 
-    azTitle: "Azure for Students",
-    gcpTitle: "GCP for Students",
-    emailTitle: "Edu Email",
-    azFrom: "Starting from",
-    gcpFrom: "Starting from",
-    emFrom: "Starting from",
-    navServices: "Services",
-    navHow: "How It Works",
-    navContact: "Contact",
-    badge: "Cloud Services For Students",
-    heroTitle: `
-      Cloud Access
-      <br>
-      For Every
-      <span class="highlight">Student</span>
-    `,
-    heroDesc:
-      "No Visa card? No university email? No problem. We provide Azure and Google Cloud subscriptions easily and safely.",
-    cta1: "Explore Services",
-    cta2: "Contact Us",
-    eduLabel: "Edu Email",
-    probLabel: "THE PROBLEM",
-    probTitle:
-      "Why Is Cloud Access Difficult <br> For Students?",
-    probSub:
-      "Students around the world face many obstacles preventing them from using top cloud platforms.",
-    p1Title: "Visa Problems",
-    p1Text:
-      "Many countries struggle with international payment cards.",
-    p2Title: "University Email",
-    p2Text:
-      "Some universities don't provide official .edu emails.",
-    p3Title: "Geo Restrictions",
-    p3Text:
-      "Some regions are excluded from student programs.",
-    p4Title: "Complex Verification",
-    p4Text:
-      "Verification processes are often long and confusing.",
-    servLabel: "OUR SERVICES",
-    servTitle: "Everything You Need In One Place",
-    servSub:
-      "Get full access to the most powerful cloud platforms without complications.",
-    azDesc:
-      "Complete Microsoft Azure subscription with free credits for learning and projects.",
-    azF1: "Free Azure Credits",
-    azF2: "Access To 25+ Services",
-    azF3: "Free Azure DevOps",
-    azF4: "Technical Support",
-    azF5: "Activation Within 24h",
-    gcpDesc:
-      "Google Cloud Platform subscription with credits and full platform access.",
-    gcpF1: "Free GCP Credits",
-    gcpF2: "Google Kubernetes Engine",
-    gcpF3: "BigQuery & Firebase",
-    gcpF4: "Vertex AI Tools",
-    gcpF5: "Instant Activation",
-    emailTitle: "Edu Email",
-    emailDesc:
-      "Official university email that unlocks educational platforms.",
-    emF1: "Official .edu Email",
-    emF2: "GitHub Student Pack",
-    emF3: "Free JetBrains",
-    emF4: "Microsoft 365",
-    emF5: "Free Canva Pro",
-    from: "Starting From",
-    howLabel: "HOW IT WORKS",
-    howTitle: "Four Simple Steps",
-    howSub:
-      "The whole process is fast and easy.",
-    s1Title: "Choose Service",
-    s1Text:
-      "Browse services and select the best one for you.",
-    s2Title: "Contact Us",
-    s2Text:
-      "Send your request and we'll reply quickly.",
-    s3Title: "Complete Payment",
-    s3Text:
-      "Easy payment methods for everyone.",
-    s4Title: "Start Using",
-    s4Text:
-      "Receive your account details and begin instantly.",
-    trustLabel: "WHY US",
-    trustTitle: "Numbers Speak For Themselves",
-    t1: "Students Served",
-    t2: "Activation Time",
-    t3: "Cloud Platforms",
-    t4: "Customer Satisfaction",
-    ctaTitle: "Ready To Start Your Cloud Journey?",
-    ctaDesc:
-      "Join hundreds of students already using Azure & Google Cloud with us.",
-    ctaBtn: "Start Now",
-    contLabel: "CONTACT",
-    contTitle: "We Are Here To Help",
+.lang-btn{
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  padding:10px 22px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:700;
+  transition:.3s;
+}
 
-    reachTitle: "Contact Us Any Way You Prefer",
+.lang-btn:hover{
+  background:var(--gold);
+  color:var(--navy);
+}
 
-    lblName: "Full Name",
-    lblEmail: "Email Address",
-    lblService: "Required Service",
-    lblMsg: "Your Message",
+/* ═════════ HERO ═════════ */
 
-    inpName: "Enter your full name",
-    inpMsg: "Write any additional details...",
+.hero{
+  min-height:100vh;
+  padding:170px 40px 100px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
 
-    optChoose: "Choose Service",
-    submitBtn: "Send Request →",
-    emailLbl: "Email Address",
-    hoursLbl: "Working Hours",
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+  linear-gradient(rgba(255,255,255,.10) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:63px 63px;
+  opacity:.4;
+}
 
-    hoursText:
-      "Saturday - Thursday, 9AM - 11PM",
+.hero-inner{
+  position:relative;
+  z-index:2;
+  max-width:950px;
+}
 
-    footerText:
-      "© 2026 CloudReach — Cloud Services For Students",
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 24px;
+  border-radius:50px;
+  background:rgba(224,194,122,.12);
+  border:1px solid rgba(224,194,122,.3);
+  color:var(--gold);
+  margin-bottom:30px;
+  font-weight:700;
+}
 
-    footerRights:
-      "All Rights Reserved"
+.hero h1{
+  font-size:clamp(50px,6vw,70px);
+  line-height:1.1;
+  font-family:'Playfair Display',serif;
+  margin-bottom:25px;
+  font-weight:900;
+}
+
+.highlight{
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  color:var(--gray);
+  line-height:1.9;
+  font-size:1.15rem;
+  margin-bottom:45px;
+}
+
+/* ═════════ BUTTONS ═════════ */
+
+.hero-cta{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.btn-primary,
+.btn-outline{
+  padding:16px 38px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:800;
+  transition:.3s;
+  display:inline-block;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:var(--navy);
+}
+
+.btn-primary:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 30px rgba(224,194,122,.35);
+}
+
+.btn-outline{
+  border:1px solid rgba(255,255,255,.18);
+  color:white;
+}
+
+.btn-outline:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+/* ═════════ FLOATING CARDS ═════════ */
+
+.floating-cards{
+  margin-top:70px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:22px;
+}
+
+.float-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  padding:20px 28px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  backdrop-filter:blur(10px);
+  transition:.3s;
+}
+
+.float-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(224,194,122,.3);
+}
+
+.float-card .icon{
+  font-size:2rem;
+}
+
+.float-card .name{
+  font-weight:800;
+}
+
+.float-card .label{
+  color:var(--gray);
+  font-size:.9rem;
+}
+
+/* ═════════ GENERAL SECTION ═════════ */
+
+.section{
+  max-width:1250px;
+  margin:auto;
+  padding:110px 40px;
+}
+
+.section-label{
+  color:var(--gold);
+  font-weight:800;
+  margin-bottom:18px;
+  letter-spacing:2px;
+}
+
+.section-title{
+  font-size:clamp(2.2rem,5vw,4rem);
+  line-height:1.2;
+  margin-bottom:22px;
+  font-family:'Playfair Display',serif;
+}
+
+.section-sub{
+  color:var(--gray);
+  line-height:1.9;
+  max-width:700px;
+}
+
+/* ═════════ PROBLEM CARDS ═════════ */
+
+.problem-grid{
+  margin-top:65px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+}
+
+.problem-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:22px;
+  padding:40px 32px;
+  transition:.3s;
+}
+
+.problem-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(224,194,122,.3);
+}
+
+.problem-icon{
+  font-size:2.5rem;
+  margin-bottom:22px;
+}
+
+.problem-title{
+  font-size:1.3rem;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+.problem-text{
+  color:var(--gray);
+  line-height:1.8;
+}
+
+/* ═════════ SERVICES ═════════ */
+
+.services-bg{
+  background:
+  linear-gradient(180deg,#07152b 0%,#0c1f3d 50%,#07152b 100%);
+}
+
+.services-grid{
+  margin-top:70px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+  gap:35px;
+}
+
+.service-card{
+  border-radius:28px;
+  padding:42px 36px;
+  transition:.35s;
+  overflow:hidden;
+  position:relative;
+}
+
+.service-card:hover{
+  transform:translateY(-10px);
+}
+
+.service-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom right,rgba(255,255,255,.06),transparent);
+  pointer-events:none;
+}
+
+/* Azure */
+
+.azure{
+  background:
+  linear-gradient(135deg,#18489f,#173872);
+  border:1px solid rgba(66,133,244,.25);
+}
+
+/* GCP */
+
+.gcp{
+  background:
+  linear-gradient(135deg,#11391b,#165824);
+  border:1px solid rgba(52,168,83,.22);
+}
+
+/* EMAIL */
+
+.email{
+  background:
+  linear-gradient(135deg,#4d260d,#6b3a18);
+  border:1px solid rgba(224,194,122,.25);
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 18px;
+  border-radius:50px;
+  font-size:.8rem;
+  font-weight:800;
+  margin-bottom:30px;
+  letter-spacing:1px;
+}
+
+.azure .badge{
+  background:rgba(66,133,244,.18);
+  color:#9ec3ff;
+}
+
+.gcp .badge{
+  background:rgba(52,168,83,.18);
+  color:#8ce39f;
+}
+
+.email .badge{
+  background:rgba(224,194,122,.15);
+  color:var(--gold2);
+}
+
+.service-card h3{
+  font-size:2rem;
+  margin-bottom:18px;
+  font-weight:800;
+}
+
+.service-card p{
+  line-height:1.9;
+  color:rgba(255,255,255,.75);
+  margin-bottom:28px;
+}
+
+.service-features{
+  list-style:none;
+}
+
+.service-features li{
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  color:rgba(255,255,255,.88);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.service-features li::before{
+  content:"✓";
+  color:var(--gold);
+  font-weight:bold;
+}
+
+.service-price{
+  margin-top:32px;
+  color:rgba(255,255,255,.65);
+}
+
+.service-price strong{
+  font-size:2rem;
+  color:white;
+}
+
+/* ═════════ HOW IT WORKS ═════════ */
+
+.steps{
+  margin-top:70px;
+  position:relative;
+}
+
+.steps::before{
+  content:"";
+  position:absolute;
+  right:28px;
+  top:30px;
+  bottom:30px;
+  width:2px;
+  background:linear-gradient(var(--gold),transparent);
+}
+
+.step{
+  position:relative;
+  display:flex;
+  gap:28px;
+  padding:35px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.step-num{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:var(--navy);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:1.2rem;
+  z-index:2;
+}
+
+.step-content h4{
+  font-size:1.5rem;
+  margin-bottom:10px;
+}
+
+.step-content p{
+  color:var(--gray);
+  line-height:1.9;
+}
+
+/* ═════════ TRUST ═════════ */
+
+.trust-grid{
+  margin-top:65px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+}
+
+.trust-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:24px;
+  padding:45px 25px;
+  text-align:center;
+  transition:.3s;
+}
+
+.trust-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(224,194,122,.25);
+}
+
+.trust-card .num{
+  font-size:4rem;
+  font-weight:900;
+  color:var(--gold);
+  margin-bottom:10px;
+  font-family:'Playfair Display',serif;
+}
+
+.trust-card .desc{
+  color:var(--gray);
+}
+
+/* ═════════ CTA ═════════ */
+
+.cta-section{
+  margin:0 50px 110px;
+  border-radius:35px;
+  padding:90px 40px;
+  text-align:center;
+  background:
+  radial-gradient(circle at center, rgba(224,194,122,.08), transparent 50%),
+  linear-gradient(135deg,#123267,#173f81);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.cta-section h2{
+  font-size:clamp(2.2rem,5vw,4rem);
+  margin-bottom:20px;
+  font-family:'Playfair Display',serif;
+}
+
+.cta-section p{
+  color:var(--gray);
+  margin-bottom:35px;
+}
+
+/* ═════════ CONTACT ═════════ */
+
+.contact-grid{
+  margin-top:70px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+}
+
+.contact-info h3{
+  font-size:2rem;
+  margin-bottom:35px;
+}
+
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:24px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.contact-item .icon{
+  font-size:2rem;
+}
+
+.contact-item .text{
+  color:var(--gray);
+}
+
+.contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.form-group label{
+  color:var(--gray);
+  font-weight:700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  background:#142a50;
+  border:1px solid rgba(255,255,255,.08);
+  color:white;
+  padding:16px 18px;
+  border-radius:10px;
+  font-size:1rem;
+  font-family:'Cairo',sans-serif;
+  transition:.3s;
+}
+
+.form-group textarea{
+  resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  outline:none;
+  border-color:var(--gold);
+}
+
+.form-group select option{
+  background:#102240;
+}
+
+/* ═════════ FOOTER ═════════ */
+
+footer{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:35px 50px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+footer p{
+  color:var(--gray);
+  font-size:.9rem;
+}
+
+/* ═════════ ANIMATIONS ═════════ */
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(35px);
   }
-};
 
-/* ═════════ UPDATE TEXTS ═════════ */
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-function updateTexts() {
+.hero-inner,
+.problem-card,
+.service-card,
+.trust-card,
+.contact-form,
+.contact-info{
+  animation:fadeUp 1s ease;
+}
 
-  const t = translations[currentLang];
+/* ═════════ RESPONSIVE ═════════ */
 
-  document.getElementById("nav-services").innerHTML = t.navServices;
-  document.getElementById("nav-how").innerHTML = t.navHow;
-  document.getElementById("nav-contact").innerHTML = t.navContact;
-  document.getElementById("badge-text").innerHTML = t.badge
-  document.getElementById("hero-title").innerHTML = t.heroTitle;
-  document.getElementById("hero-desc").innerHTML = t.heroDesc;
-  document.getElementById("cta1").innerHTML = t.cta1;
-  document.getElementById("cta2").innerHTML = t.cta2;
-  document.getElementById("edu-label").innerHTML = t.eduLabel;
-  document.getElementById("prob-label").innerHTML = t.probLabel;
-  document.getElementById("prob-title").innerHTML = t.probTitle;
-  document.getElementById("prob-sub").innerHTML = t.probSub;
-  document.getElementById("p1-title").innerHTML = t.p1Title;
-  document.getElementById("p1-text").innerHTML = t.p1Text;
-  document.getElementById("p2-title").innerHTML = t.p2Title;
-  document.getElementById("p2-text").innerHTML = t.p2Text;
-  document.getElementById("p3-title").innerHTML = t.p3Title;
-  document.getElementById("p3-text").innerHTML = t.p3Text;
-  document.getElementById("p4-title").innerHTML = t.p4Title;
-  document.getElementById("p4-text").innerHTML = t.p4Text;
-  document.getElementById("serv-label").innerHTML = t.servLabel;
-  document.getElementById("serv-title").innerHTML = t.servTitle;
-  document.getElementById("serv-sub").innerHTML = t.servSub;
-  document.getElementById("az-desc").innerHTML = t.azDesc;
-  document.getElementById("gcp-desc").innerHTML = t.gcpDesc;
-  document.getElementById("email-title").innerHTML = t.emailTitle;
-  document.getElementById("email-desc").innerHTML = t.emailDesc;
-  document.getElementById("how-label").innerHTML = t.howLabel;
-  document.getElementById("how-title").innerHTML = t.howTitle;
-  document.getElementById("how-sub").innerHTML = t.howSub;
-  document.getElementById("s1-title").innerHTML = t.s1Title;
-  document.getElementById("s1-text").innerHTML = t.s1Text;
-  document.getElementById("s2-title").innerHTML = t.s2Title;
-  document.getElementById("s2-text").innerHTML = t.s2Text;
-  document.getElementById("s3-title").innerHTML = t.s3Title;
-  document.getElementById("s3-text").innerHTML = t.s3Text;
-  document.getElementById("s4-title").innerHTML = t.s4Title;
-  document.getElementById("s4-text").innerHTML = t.s4Text;
-  document.getElementById("trust-label").innerHTML = t.trustLabel;
-  document.getElementById("trust-title").innerHTML = t.trustTitle;
-  document.getElementById("t1").innerHTML = t.t1;
-  document.getElementById("t2").innerHTML = t.t2;
-  document.getElementById("t3").innerHTML = t.t3;
-  document.getElementById("t4").innerHTML = t.t4;
-  document.getElementById("cta-title").innerHTML = t.ctaTitle;
-  document.getElementById("cta-desc").innerHTML = t.ctaDesc;
-  document.getElementById("cta-btn").innerHTML = t.ctaBtn;
-  document.getElementById("cont-label").innerHTML = t.contLabel;
-  document.getElementById("cont-title").innerHTML = t.contTitle;
-  document.getElementById("reach-title").innerHTML = t.reachTitle;
-  document.getElementById("lbl-name").innerHTML = t.lblName;
-  document.getElementById("lbl-email").innerHTML = t.lblEmail;
-  document.getElementById("lbl-service").innerHTML = t.lblService;
-  document.getElementById("lbl-msg").innerHTML = t.lblMsg;
-  document.getElementById("inp-name").placeholder = t.inpName;
-  document.getElementById("inp-msg").placeholder = t.inpMsg;
-  document.getElementById("opt-choose").innerHTML = t.optChoose;
-  document.getElementById("submit-btn").innerHTML = t.submitBtn;
-  document.getElementById("email-lbl").innerHTML = t.emailLbl;
-  document.getElementById("hours-lbl").innerHTML = t.hoursLbl;
-  document.getElementById("hours-text").innerHTML = t.hoursText;
-  document.getElementById("footer-text").innerHTML = t.footerText;
-  document.getElementById("footer-rights").innerHTML = t.footerRights;
+@media(max-width:900px){
 
-document.getElementById("az-f1").innerHTML = t.azF1;
-document.getElementById("az-f2").innerHTML = t.azF2;
-document.getElementById("az-f3").innerHTML = t.azF3;
-document.getElementById("az-f4").innerHTML = t.azF4;
-document.getElementById("az-f5").innerHTML = t.azF5;
-document.getElementById("gcp-f1").innerHTML = t.gcpF1;
-document.getElementById("gcp-f2").innerHTML = t.gcpF2;
-document.getElementById("gcp-f3").innerHTML = t.gcpF3;
-document.getElementById("gcp-f4").innerHTML = t.gcpF4;
-document.getElementById("gcp-f5").innerHTML = t.gcpF5;
-document.getElementById("em-f1").innerHTML = t.emF1;
-document.getElementById("em-f2").innerHTML = t.emF2;
-document.getElementById("em-f3").innerHTML = t.emF3;
-document.getElementById("em-f4").innerHTML = t.emF4;
-document.getElementById("em-f5").innerHTML = t.emF5;
-document.getElementById("az-title").innerHTML = t.azTitle;
-document.getElementById("gcp-title").innerHTML = t.gcpTitle;
-document.getElementById("email-title").innerHTML = t.emailTitle;
-document.getElementById("az-from").innerHTML = t.azFrom;
-document.getElementById("gcp-from").innerHTML = t.gcpFrom;
-document.getElementById("em-from").innerHTML = t.emFrom;
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .services-grid{
+    grid-template-columns:1fr;
+  }
+
+  .problem-grid{
+    grid-template-columns:1fr;
+  }
+
+  .trust-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .lang-bar{
+    padding:18px 22px;
+  }
+
+  .hero{
+    padding:150px 20px 90px;
+  }
+
+  .section{
+    padding:90px 20px;
+  }
+
+  .cta-section{
+    margin:0 20px 80px;
+    padding:70px 20px;
+  }
+
+  footer{
+    text-align:center;
+    flex-direction:column;
+  }
+
+  .trust-grid{
+    grid-template-columns:1fr;
+  }
+
 }
